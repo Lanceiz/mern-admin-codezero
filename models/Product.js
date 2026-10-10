@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
-
 const productSchema = new mongoose.Schema({
   enabled: {
     type: Boolean,

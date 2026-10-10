@@ -7,6 +7,11 @@ export const selectCurrentAdmin = createSelector(
   (auth) => auth.current
 );
 
+export const selectCurrentAdminRole = createSelector(
+  [selectCurrentAdmin],
+  (current) => (current && current.role) || "admin"
+);
+
 export const isLoggedIn = createSelector(
   [authSelect],
   (auth) => auth.isLoggedIn

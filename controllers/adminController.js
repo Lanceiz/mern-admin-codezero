@@ -19,7 +19,7 @@ exports.list = async (req, res) => {
       .sort({ created: "desc" })
       .populate();
     // Counting the total documents
-    const countPromise = Admin.count();
+    const countPromise = Admin.countDocuments();
     // Resolving both promises
     const [result, count] = await Promise.all([resultsPromise, countPromise]);
     // Calculating total pages
@@ -191,6 +191,17 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     let { email } = req.body;
+
+    if (
+      req.body.role &&
+      !["admin", "manager", "viewer"].includes(req.body.role)
+    ) {
+      return res.status(400).json({
+        success: false,
+        result: null,
+        message: "Role must be admin, manager, or viewer.",
+      });
+    }
 
     if (email) {
       const existingAdmin = await Admin.findOne({ email: email });

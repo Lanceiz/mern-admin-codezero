@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-mongoose.Promise = global.Promise;
 const bcrypt = require("bcryptjs");
 
 const adminSchema = new Schema({
@@ -11,6 +10,11 @@ const adminSchema = new Schema({
   enabled: {
     type: Boolean,
     default: true,
+  },
+  role: {
+    type: String,
+    enum: ["admin", "manager", "viewer"],
+    default: "admin",
   },
   email: {
     type: String,

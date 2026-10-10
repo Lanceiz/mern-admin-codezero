@@ -46,6 +46,7 @@ exports.register = async (req, res) => {
         id: savedAdmin._id,
         name: savedAdmin.name,
         surname: savedAdmin.surname,
+        role: savedAdmin.role,
       },
     });
   } catch (err) {
@@ -86,6 +87,7 @@ exports.login = async (req, res) => {
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
         id: admin._id,
+        role: admin.role || "admin",
       },
       process.env.JWT_SECRET
     );
@@ -106,6 +108,7 @@ exports.login = async (req, res) => {
           id: result._id,
           name: result.name,
           isLoggedIn: result.isLoggedIn,
+          role: result.role || "admin",
         },
       },
       message: "Successfully login admin",
