@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
-
 const leadSchema = new mongoose.Schema({
   date: {
     type: String,

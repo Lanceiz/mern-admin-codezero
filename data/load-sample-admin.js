@@ -3,7 +3,6 @@ const fs = require("fs");
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE);
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 const Admin = require("../models/Admin");
 

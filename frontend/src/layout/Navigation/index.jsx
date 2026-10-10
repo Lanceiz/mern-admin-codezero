@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
-  SettingOutlined,
   UserOutlined,
   CustomerServiceOutlined,
   FileTextOutlined,
@@ -11,12 +11,13 @@ import {
   DashboardOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
+import { selectCurrentAdminRole } from "@/redux/auth/selectors";
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 function Navigation() {
   const [collapsed, setCollapsed] = useState(false);
+  const role = useSelector(selectCurrentAdminRole);
 
   const onCollapse = () => {
     setCollapsed(!collapsed);
@@ -51,15 +52,12 @@ function Navigation() {
             <Link to="/product" />
             Product
           </Menu.Item>
-          <Menu.Item key="31" icon={<TeamOutlined />}>
-            <Link to="/admin" />
-            Admins Management
-          </Menu.Item>
-
-          <Menu.Item key="32" icon={<SettingOutlined />}>
-            <Link to="/settings" />
-            Settings
-          </Menu.Item>
+          {role === "admin" && (
+            <Menu.Item key="31" icon={<TeamOutlined />}>
+              <Link to="/admin" />
+              Admins Management
+            </Menu.Item>
+          )}
         </Menu>
       </Sider>
     </>

@@ -165,7 +165,7 @@ exports.list = async (Model, req, res) => {
       .sort({ created: "desc" })
       .populate();
     // Counting the total documents
-    const countPromise = Model.count();
+    const countPromise = Model.countDocuments();
     // Resolving both promises
     const [result, count] = await Promise.all([resultsPromise, countPromise]);
     // Calculating total pages

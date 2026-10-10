@@ -47,7 +47,12 @@ export default function AppRouter() {
           />
           <PrivateRoute component={Lead} path="/lead" exact />
           <PrivateRoute component={Product} path="/product" exact />
-          <PrivateRoute component={Admin} path="/admin" exact />
+          <PrivateRoute
+            component={Admin}
+            path="/admin"
+            exact
+            allowedRoles={["admin"]}
+          />
 
           <PrivateRoute component={Logout} path="/logout" exact />
           <PublicRoute path="/login" render={() => <Redirect to="/" />} />
